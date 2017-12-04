@@ -25,6 +25,28 @@
                margin-left: 20px;
                margin-bottom: 20px;
            }
+           #cpu p{
+               background: #f0f0f0;
+               margin-bottom: 10px;
+               cursor: pointer;
+           }
+           #detail{
+               margin: 0px 0 0 100px;
+           }
+           #detail button{
+               margin-right: 50px;
+           }
+           #downDetail{
+               margin: 10px 0 0 50px;
+               
+           }
+           #downDetail div{
+               width: 120px;
+               height: 100px;
+               border: 1px solid #f0f0f0;
+               float: left;
+               visibility: hidden;
+           }
        </style>
    </head>
    <body >    
@@ -45,9 +67,9 @@
             <div id="config">
                 <div id="baseset">基础配置</div>
                 <div id="cpu">
-                    <p @click= "clickset('2g')">CPU 1核 内存 2g 带宽 2M </p>
-                    <p @click= "clickset('4g')">CPU 4核 内存 4g 带宽 5M</p>
-                    <p @click= "clickset('8g')">CPU 4核 内存 8g 带宽 10M</p>
+                    <p @click= "clickset('2g')" v-on:click="changeCpu" id="cpu2g">CPU 1核 内存 2g 带宽 2M </p>
+                    <p @click= "clickset('4g')" v-on:click="changeCpu2" id="cpu4g">CPU 4核 内存 4g 带宽 5M</p>
+                    <p @click= "clickset('8g')" v-on:click="changeCpu3" id="cpu8g">CPU 4核 内存 8g 带宽 10M</p>
                 </div>
             </div>
             <div>{{baseset}}</div>
@@ -62,7 +84,19 @@
             <div>{{area}}</div>
         </div>
         <!-- 为ECharts准备一个具备大小（宽高）的Dom -->    
-        <div  id="main" style="width: 600px;height:450px;"></div>    
+        <div  id="main" style="width: 600px;height:450px; "></div> 
+        <div id="detail">
+            <button id="detUclod" v-on:click="showDetailUcloud" >查看详情</button>
+            <button id="detAliyun" v-on:click="showDetailAliyun">查看详情</button>
+            <button id="detTecentyun" v-on:click="showDetailTecentyun">查看详情</button>
+            <button id="detJinyun" v-on:click="showDetailJinshan">查看详情</button>    
+        </div> 
+        <div id="downDetail">
+            <div id="down1"></div>
+            <div id="down2"></div>
+            <div id="down3"></div>
+            <div id="down4"></div>
+        </div>  
       </div>
       <script>  
   
@@ -225,28 +259,52 @@
                     }
                 },
                 changeData: function(){
-                    // this.message = [10,20,30,50];
                     $('#shanghai').css({"background":'blue','color':'#fff'});
                     $('button#shanghai').siblings().css({"background":'#eee','color':'#000'});
                 },  
                 changeData2: function(){
-                    // this.message = [20,30,40,50];
                     $('#guangzhou').css({"background":'blue','color':'#fff'});
                     $('button#guangzhou').siblings().css({"background":'#eee','color':'#000'});
                 },  
                 changeData3: function(){
-                    // this.message = [25,30,45,50];
                     $('#beijing').css({"background":'blue','color':'#fff'});
                     $('button#beijing').siblings().css({"background":'#eee','color':'#000'});
                 },  
                 changeData4: function(){
-                    // this.message = [10,30,10,50];
                     $('#chengdou').css({"background":'blue','color':'#fff'});
                     $('button#chengdou').siblings().css({"background":'#eee','color':'#000'});
-                },  
+                }, 
+                changeCpu: function(){
+                    $('#cpu2g').css({"background":'blue','color':'#fff'});
+                    $('p#cpu2g').siblings().css({"background":'#eee','color':'#000'});
+                },
+                changeCpu2: function(){
+                    $('#cpu4g').css({"background":'blue','color':'#fff'});
+                    $('p#cpu4g').siblings().css({"background":'#eee','color':'#000'});
+                },
+                changeCpu3: function(){
+                    $('#cpu8g').css({"background":'blue','color':'#fff'});
+                    $('p#cpu8g').siblings().css({"background":'#eee','color':'#000'});
+                },
+                showDetailUcloud: function(){
+                    $('#down1').css({"visibility":"visible"});
+                    $('div#down1').siblings().css({"visibility":"hidden"});
+                },
+                showDetailAliyun: function(){
+                    $('#down2').css({"visibility":"visible"});
+                    $('div#down2').siblings().css({"visibility":"hidden"});
+                },
+                showDetailTecentyun: function(){
+                    $('#down3').css({"visibility":"visible"});
+                    $('div#down3').siblings().css({"visibility":"hidden"});
+                },
+                showDetailJinshan: function(){
+                    $('#down4').css({"visibility":"visible"});
+                    $('div#down4').siblings().css({"visibility":"hidden"});
+                },
             draw(){                                                                             
                 // 指定图表的配置项和数据    
-                var category=["ucloud","啊里云","腾讯云","金山云"];  
+                var category=["ucloud","阿里云","腾讯云","金山云"];  
                 var option = {    
                     title: {    
                         // text: 'ECharts 入门示例'    
