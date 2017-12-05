@@ -62,14 +62,24 @@ var geoCoordMap = {
     '北京':[116.46,39.92],
 };
 
+//云商地域分布
+var yunMap = {
+    '上海':['ucloud','阿里云','腾讯云','金山云'],
+    '广州':['ucloud','阿里云','腾讯云','金山云'],
+    '成都':['腾讯云'],
+    '北京':['ucloud','阿里云','腾讯云','金山云'],
+};
+
 var convertData = function (data) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
         var geoCoord = geoCoordMap[data[i].name];
+        var yun = yunMap[data[i].name];
         if (geoCoord) {
             res.push({
                 name: data[i].name,
-                value: geoCoord.concat(data[i].value)
+                value: geoCoord.concat(data[i].value),
+                yuns: yun
                 // value: geoCoord
             });
         }
@@ -94,14 +104,19 @@ option = {
         textStyle: {
             align: 'left'
         },
+        //云商地域分布展示格式
         formatter:function(data){
             var jsonStr = JSON.stringify(data);
             // var res = data.seriesName +':'+ Math.ceil(data.data.value[2]/100) ;
-            var res = data.seriesName +':'+ ' ucloud <p class="ptab"> aliyun</p> <p class="ptab"> 腾讯云</p> <p class="ptab">金山云</p>' ;
+            // var res = data.seriesName +':'+ ' ucloud <p class="ptab"> aliyun</p> <p class="ptab"> 腾讯云</p> <p class="ptab">金山云</p>' ;
+            var res = data.seriesName +':'+data.data.yuns.length +'家' + '&nbsp' + data.data.yuns ;
+            // var res = jsonStr;
             // for(var i =0;i<data.length;i++){
             //     res = '<p>'+jsonStr[i].seriesName+'</p>';
             // }
+            // console.log(res);
             return res;
+            
         }
     },
     legend: {
@@ -136,7 +151,7 @@ option = {
     },
     series : [
         {
-            name: '云主机',
+            name: '云商',
             type: 'scatter',
             coordinateSystem: 'geo',
             data: convertData(data),
@@ -160,7 +175,7 @@ option = {
             }
         },
         {
-            name: '云主机',
+            name: '云商',
             type: 'effectScatter',
             coordinateSystem: 'geo',
             data: convertData(data.sort(function (a, b) {
