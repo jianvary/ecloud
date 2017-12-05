@@ -1,5 +1,5 @@
 var data = {
-    'two':{
+    'twog':{
         'cpu':'1c',
         'mem': '2g',
         'bandwidth': '2M',
