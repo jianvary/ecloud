@@ -59,6 +59,7 @@
        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
        <script type="text/javascript" src="http://www.jianvary.com/vue.js"></script>
        <script type="text/javascript" src="http://www.jianvary.com/jquery.js"></script>
+       <script src="json.js"></script>
        <div id="app">  
         <div style="margin-top:20px;">
             <div id="price">
@@ -92,10 +93,34 @@
             <button id="detJinyun" v-on:click="showDetailJinshan">查看详情</button>    
         </div> 
         <div id="downDetail">
-            <div id="down1"></div>
-            <div id="down2"></div>
-            <div id="down3"></div>
-            <div id="down4"></div>
+            <div id="down1">
+                <p>
+                    <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
+                    <li>带宽：{{bandwidth}}</li>
+                    <li>硬盘：20G 系统配送</li>
+                </p>
+            </div>
+            <div id="down2">
+                <p>
+                    <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
+                    <li>带宽：{{bandwidth}}</li>
+                    <li>硬盘：40G 系统配送</li>
+                </p>
+            </div>
+            <div id="down3">
+                <p>
+                    <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
+                    <li>带宽：{{bandwidth}}</li>
+                    <li>硬盘：30G 系统配送</li>
+                </p>
+            </div>
+            <div id="down4">
+                <p>
+                    <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
+                    <li>带宽：{{bandwidth}}</li>
+                    <li>硬盘：10G 系统配送</li>
+                </p>
+            </div>
         </div>  
       </div>
       <script>  
@@ -106,7 +131,10 @@
             data: {
                 message:[10,20,30,50],
                 baseset: '2g',
-                area: 'beijing'
+                area: 'beijing',
+                cpu: '1c',
+                mem: '2g',
+                bandwidth: '2M'
 
             },  
             computed: {
