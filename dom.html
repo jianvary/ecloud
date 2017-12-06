@@ -42,8 +42,8 @@
            }
            #downDetail div{
                width: 120px;
-               height: 100px;
-               border: 1px solid #f0f0f0;
+               height: 120px;
+               /* border: 1px solid #f0f0f0; */
                float: left;
                visibility: hidden;
            }
@@ -98,6 +98,7 @@
                     <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
                     <li>带宽：{{bandwidth}}</li>
                     <li>硬盘：20G 系统配送</li>
+                    <li>北京1<br>可用区A</li>
                 </p>
             </div>
             <div id="down2">
@@ -105,6 +106,7 @@
                     <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
                     <li>带宽：{{bandwidth}}</li>
                     <li>硬盘：40G 系统配送</li>
+                    <li>可用区B</li>
                 </p>
             </div>
             <div id="down3">
@@ -112,6 +114,7 @@
                     <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
                     <li>带宽：{{bandwidth}}</li>
                     <li>硬盘：30G 系统配送</li>
+                    <li>可用区A</li>
                 </p>
             </div>
             <div id="down4">
@@ -119,6 +122,7 @@
                     <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
                     <li>带宽：{{bandwidth}}</li>
                     <li>硬盘：10G 系统配送</li>
+                    <li>可用区B</li>
                 </p>
             </div>
         </div>  
@@ -220,6 +224,9 @@
                 zongData: function(){
                     // this.baseset = val222;
                     if(this.baseset =='2g'){
+                        this.cpu = '1c';
+                        this.mem = '2g';
+                        this.bandwidth = '2M';
                         switch(this.area){
                             case 'beijing':
                                 this.message = [20,25,30,35];
@@ -242,6 +249,9 @@
                         }
                     }
                     if(this.baseset =='4g'){
+                        this.cpu = '4c';
+                        this.mem = '4g';
+                        this.bandwidth = '5M';
                         switch(this.area){
                             case 'beijing':
                                 this.message = [30,25,30,35];
@@ -264,6 +274,9 @@
                         }
                     }
                     if(this.baseset =='8g'){
+                        this.cpu = '4c';
+                        this.mem = '8g';
+                        this.bandwidth = '10M';
                         switch(this.area){
                             case 'beijing':
                                 this.message = [20,28,30,35];

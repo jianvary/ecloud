@@ -13,28 +13,28 @@ var data = {
             'beijing': [126,96,125,111],
 
             'shanghaiJson':{
-                'ucloud': 126,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 226,
+                'aliyun': 196,
+                'tecentyun': 100,
+                'ksyun': 211
             },
-            'shanghai': [220,270,240,200],
+            'shanghai': [226,196,100,211],
 
             'guangzhouJson':{
                 'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'aliyun': 296,
+                'tecentyun': 60,
+                'ksyun': 311
             },
-            'guangzhou': [220,270,240,200],
+            'guangzhou': [185,296,60,311],
 
             'chengduJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 300,
+                'aliyun': 196,
+                'tecentyun': 40,
+                'ksyun': 411
             },
-            'chengdu': [220,270,240,200],
+            'chengdu': [300,196,40,411],
         }
     },
     'fourg':{
@@ -43,33 +43,33 @@ var data = {
         'bandwidth': '5M',
         'city': {
             'beijingJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 485,
+                'aliyun': 296,
+                'tecentyun': 220,
+                'ksyun': 311
             },
-            'beijing': [185,96,0,111],
+            'beijing': [485,296,220,311],
             'shanghaiJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 125,
+                'aliyun': 26,
+                'tecentyun': c,
+                'ksyun': 151
             },
-            'shanghai': [220,270,240,200],
+            'shanghai': [125,26,240,26],
             'guangzhouJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 385,
+                'aliyun': 396,
+                'tecentyun': 300,
+                'ksyun': 211
             },
-            'guangzhou': [220,270,240,200],
+            'guangzhou': [385,396,300,211],
             'chengduJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 0,
+                'aliyun': 0,
+                'tecentyun': 100,
+                'ksyun': 0
             },
-            'chengdu': [220,270,240,200],
+            'chengdu': [0,0,100,0],
         }
     },
     'eightg':{
@@ -78,33 +78,33 @@ var data = {
         'bandwidth': '10M',
         'city': {
             'beijingJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 585,
+                'aliyun': 696,
+                'tecentyun': 300,
+                'ksyun': 236
             },
-            'beijing': [185,96,0,111],
+            'beijing': [585,696,300,236],
             'shanghaiJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 222,
+                'aliyun': 111,
+                'tecentyun': 330,
+                'ksyun': 411
             },
-            'shanghai': [220,270,240,200],
+            'shanghai': [222,111,330,401],
             'guangzhouJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 85,
+                'aliyun': 66,
+                'tecentyun': 10,
+                'ksyun': 61
             },
-            'guangzhou': [220,270,240,200],
+            'guangzhou': [85,66,10,61],
             'chengduJson':{
-                'ucloud': 185,
-                'aliyun': 96,
-                'tecentyun': 0,
-                'ksyun': 111
+                'ucloud': 0,
+                'aliyun': 0,
+                'tecentyun': 200,
+                'ksyun': 0
             },
-            'chengdu': [220,270,240,200],
+            'chengdu': [0,0,200,0],
         }
     },
 };
