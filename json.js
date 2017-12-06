@@ -29,12 +29,18 @@ var data = {
             'guangzhou': [185,296,60,311],
 
             'chengduJson':{
-                'ucloud': 300,
-                'aliyun': 196,
-                'tecentyun': 40,
-                'ksyun': 411
+                'ucloud': 0,
+                'aliyun': 0,
+                'tecentyun': 190,
+                'ksyun': 0
             },
-            'chengdu': [300,196,40,411],
+            'chengdu': [0,0,190,0],
+        },
+        cityName: {
+            beijing: '北京',
+            shanghai: '上海',
+            guangzhou: '广州',
+            chengdu: '成都'
         }
     },
     'fourg':{
@@ -52,7 +58,7 @@ var data = {
             'shanghaiJson':{
                 'ucloud': 125,
                 'aliyun': 26,
-                'tecentyun': c,
+                'tecentyun': 240,
                 'ksyun': 151
             },
             'shanghai': [125,26,240,26],
@@ -70,6 +76,12 @@ var data = {
                 'ksyun': 0
             },
             'chengdu': [0,0,100,0],
+        },
+        cityName: {
+            beijing: '北京',
+            shanghai: '上海',
+            guangzhou: '广州',
+            chengdu: '成都'
         }
     },
     'eightg':{
@@ -105,6 +117,12 @@ var data = {
                 'ksyun': 0
             },
             'chengdu': [0,0,200,0],
+        },
+        cityName: {
+            beijing: '北京',
+            shanghai: '上海',
+            guangzhou: '广州',
+            chengdu: '成都'
         }
     },
 };

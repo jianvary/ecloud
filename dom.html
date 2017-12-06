@@ -73,16 +73,17 @@
                     <p @click= "clickset('8g')" v-on:click="changeCpu3" id="cpu8g">CPU 4核 内存 8g 带宽 10M</p>
                 </div>
             </div>
-            <div>{{baseset}}</div>
+            <!-- <div>{{baseset}}</div> -->
             <div style="clear:both;"></div>
+            <div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>-华东-</span>&nbsp<span>-华南-</span>&nbsp<span>-华北-</span>&nbsp<span>-西南-</span></div>
             <div id="area">
                 地区：
-                <button v-on:click="clickArea('shanghai')" @click="changeData" id="shanghai">上海</button>  
-                <button v-on:click="clickArea('guangzhou')" @click="changeData2" id="guangzhou">广州</button>  
-                <button v-on:click="clickArea('beijing')" @click="changeData3" id="beijing">北京</button>  
-                <button v-on:click="clickArea('chengdou')" @click="changeData4" id="chengdou">成都</button>  
+                <button v-on:click="clickArea('shanghai')" @click="changeData" id="shanghai">上海</button> &nbsp&nbsp 
+                <button v-on:click="clickArea('guangzhou')" @click="changeData2" id="guangzhou">广州</button>  &nbsp&nbsp
+                <button v-on:click="clickArea('beijing')" @click="changeData3" id="beijing">北京</button>  &nbsp&nbsp
+                <button v-on:click="clickArea('chengdu')" @click="changeData4" id="chengdu">成都</button>  &nbsp&nbsp
             </div>
-            <div>{{area}}</div>
+            <!-- <div>{{area}}</div> -->
         </div>
         <!-- 为ECharts准备一个具备大小（宽高）的Dom dd-->    
         <div  id="main" style="width: 600px;height:450px; "></div> 
@@ -97,32 +98,32 @@
                 <p>
                     <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
                     <li>带宽：{{bandwidth}}</li>
-                    <li>硬盘：20G 系统配送</li>
-                    <li>北京1<br>可用区A</li>
+                    <li>硬盘：20G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
+                    <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区A</li>
                 </p>
             </div>
             <div id="down2">
                 <p>
                     <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
                     <li>带宽：{{bandwidth}}</li>
-                    <li>硬盘：40G 系统配送</li>
-                    <li>可用区B</li>
+                    <li>硬盘：40G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
+                    <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区B</li>
                 </p>
             </div>
             <div id="down3">
                 <p>
                     <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
                     <li>带宽：{{bandwidth}}</li>
-                    <li>硬盘：30G 系统配送</li>
-                    <li>可用区A</li>
+                    <li>硬盘：30G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
+                    <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区A</li>
                 </p>
             </div>
             <div id="down4">
                 <p>
                     <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
                     <li>带宽：{{bandwidth}}</li>
-                    <li>硬盘：10G 系统配送</li>
-                    <li>可用区B</li>
+                    <li>硬盘：10G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
+                    <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区B</li>
                 </p>
             </div>
         </div>  
@@ -138,7 +139,8 @@
                 area: 'beijing',
                 cpu: '1c',
                 mem: '2g',
-                bandwidth: '2M'
+                bandwidth: '2M',
+                cityName: '全国'
 
             },  
             computed: {
@@ -161,7 +163,7 @@
                                 break;
                         }
                         switch(this.area){
-                            case 'chengdou':
+                            case 'chengdu':
                                 this.message = [10,55,10,55];
                                 break;
                         }
@@ -183,7 +185,7 @@
                                 break;
                         }
                         switch(this.area){
-                            case 'chengdou':
+                            case 'chengdu':
                                 this.message = [10,55,10,55];
                                 break;
                         }
@@ -205,7 +207,7 @@
                                 break;
                         }
                         switch(this.area){
-                            case 'chengdou':
+                            case 'chengdu':
                                 this.message = [10,55,10,55];
                                 break;
                         }
@@ -229,22 +231,20 @@
                         this.bandwidth = '2M';
                         switch(this.area){
                             case 'beijing':
-                                this.message = [20,25,30,35];
+                                this.message = data.twog.city.beijing;
+                                this.cityName = data.twog.cityName.beijing;
                                 break;
-                        }
-                        switch(this.area){
                             case 'shanghai':
-                                this.message = [25,35,35,25];
+                                this.message = data.twog.city.shanghai;
+                                this.cityName = data.twog.cityName.shanghai;
                                 break;
-                        }
-                        switch(this.area){
                             case 'guangzhou':
-                                this.message = [40,25,60,25];
+                                this.message = data.twog.city.guangzhou;
+                                this.cityName = data.twog.cityName.guangzhou;
                                 break;
-                        }
-                        switch(this.area){
-                            case 'chengdou':
-                                this.message = [10,55,10,55];
+                            case 'chengdu':
+                                this.message = data.twog.city.chengdu;
+                                this.cityName = data.twog.cityName.chengdu;
                                 break;
                         }
                     }
@@ -254,22 +254,20 @@
                         this.bandwidth = '5M';
                         switch(this.area){
                             case 'beijing':
-                                this.message = [30,25,30,35];
+                                this.message = data.fourg.city.beijing;
+                                this.cityName = data.twog.cityName.beijing;
                                 break;
-                        }
-                        switch(this.area){
                             case 'shanghai':
-                                this.message = [35,35,35,25];
+                                this.message = data.fourg.city.shanghai;
+                                this.cityName = data.twog.cityName.shanghai;
                                 break;
-                        }
-                        switch(this.area){
                             case 'guangzhou':
-                                this.message = [30,25,60,25];
+                                this.message = data.fourg.city.guangzhou;
+                                this.cityName = data.twog.cityName.guangzhou;
                                 break;
-                        }
-                        switch(this.area){
-                            case 'chengdou':
-                                this.message = [30,55,10,55];
+                            case 'chengdu':
+                                this.message = data.fourg.city.chengdu;
+                                this.cityName = data.twog.cityName.chengdu;
                                 break;
                         }
                     }
@@ -279,22 +277,20 @@
                         this.bandwidth = '10M';
                         switch(this.area){
                             case 'beijing':
-                                this.message = [20,28,30,35];
+                                this.message = data.eightg.city.beijing;
+                                this.cityName = data.twog.cityName.beijing;
                                 break;
-                        }
-                        switch(this.area){
                             case 'shanghai':
-                                this.message = [25,38,35,25];
+                                this.message = data.eightg.city.shanghai;
+                                this.cityName = data.twog.cityName.shanghai;
                                 break;
-                        }
-                        switch(this.area){
                             case 'guangzhou':
-                                this.message = [40,28,60,25];
+                                this.message = data.eightg.city.guangzhou;
+                                this.cityName = data.twog.cityName.guangzhou;
                                 break;
-                        }
-                        switch(this.area){
-                            case 'chengdou':
-                                this.message = [10,58,10,55];
+                            case 'chengdu':
+                                this.message = data.eightg.city.chengdu;
+                                this.cityName = data.twog.cityName.chengdu;
                                 break;
                         }
                     }
@@ -312,8 +308,8 @@
                     $('button#beijing').siblings().css({"background":'#eee','color':'#000'});
                 },  
                 changeData4: function(){
-                    $('#chengdou').css({"background":'blue','color':'#fff'});
-                    $('button#chengdou').siblings().css({"background":'#eee','color':'#000'});
+                    $('#chengdu').css({"background":'blue','color':'#fff'});
+                    $('button#chengdu').siblings().css({"background":'#eee','color':'#000'});
                 }, 
                 changeCpu: function(){
                     $('#cpu2g').css({"background":'blue','color':'#fff'});
@@ -407,7 +403,11 @@
         // $("body").click(function(){
         //     $("#downDetail div").css({"visibility":"hidden"});
         // });
-  
+            // alert(data.twog.cpu);
+        var sear = location.search.slice(6);
+        console.log(data.twog.cityName.shanghai);
+        $('#'+sear).click();
+        $('#cpu2g').click();
     </script>  
    </body>
 </html>
