@@ -1,413 +1,444 @@
 <!DOCTYPE html>
-<html style="height: 100%">
+<html>
    <head>
-       <meta charset="utf-8">
-       <title>价格对比</title>
-       <style>
-           *{
-               padding: 0;
-               margin: 0;
-           }
-           #price{
-               margin: 0 0 10px 20px;
-           }
-           #config{
-               margin: 0 0 10px 20px;
-           }
-           #area{
-               margin: 0 0 10px 20px;
-           }
-           #baseset{
-               float: left;
-           }
-           #cpu{
-               float: left;
-               margin-left: 20px;
-               margin-bottom: 20px;
-           }
-           #cpu p{
-               background: #f0f0f0;
-               margin-bottom: 10px;
-               cursor: pointer;
-           }
-           #detail{
-               margin: 0px 0 0 100px;
-           }
-           #detail button{
-               margin-right: 50px;
-           }
-           #downDetail{
-               margin: 10px 0 0 50px;
-               
-           }
-           #downDetail div{
-               width: 120px;
-               height: 120px;
-               /* border: 1px solid #f0f0f0; */
-               float: left;
-               visibility: hidden;
-           }
-       </style>
+        <meta charset="utf-8">
+        <title>价格对比</title>
+        <link rel="stylesheet" href="css/base.css">
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+            }
+            #app{
+                /* text-align: center; */
+                position: relative;
+            }
+            #price{
+                margin: 0 0 10px 20px;
+                color: blue;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            #config{
+                margin: 0 0 10px 20px;
+                position: relative;
+            }
+            #area{
+                margin: 0 0 10px 20px;
+            }
+            #baseset{
+                float: left;
+                color: blue;
+            }
+            #cpu{
+                float: left;
+                margin-left: 20px;
+                margin-bottom: 20px;
+            }
+            #cpu p{
+                background: #f0f0f0;
+                margin-bottom: 10px;
+                cursor: pointer;
+            }
+            #detail{
+                margin: 0px 0 0 100px;
+            }
+            #detail button{
+                margin-right: 50px;
+            }
+            #downDetail{
+                margin: 10px 0 0 50px;
+                
+            }
+            #downDetail div{
+                width: 120px;
+                height: 120px;
+                /* border: 1px solid #f0f0f0; */
+                float: left;
+                visibility: hidden;
+            }
+        </style>
    </head>
    <body >    
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-       <script type="text/javascript" src="http://www.jianvary.com/vue.js"></script>
-       <script type="text/javascript" src="http://www.jianvary.com/jquery.js"></script>
-       <script src="json.js"></script>
-       <div id="app">  
-        <div style="margin-top:20px;">
-            <div id="price">
-                价格对比 
-            </div>
-            <div id="config">
-                <div id="baseset">基础配置</div>
-                <div id="cpu">
-                    <p @click= "clickset('2g')" v-on:click="changeCpu" id="cpu2g">CPU 1核 内存 2g 带宽 2M </p>
-                    <p @click= "clickset('4g')" v-on:click="changeCpu2" id="cpu4g">CPU 4核 内存 4g 带宽 5M</p>
-                    <p @click= "clickset('8g')" v-on:click="changeCpu3" id="cpu8g">CPU 4核 内存 8g 带宽 10M</p>
-                </div>
-            </div>
-            <!-- <div>{{baseset}}</div> -->
-            <div style="clear:both;"></div>
-            <div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>-华东-</span>&nbsp<span>-华南-</span>&nbsp<span>-华北-</span>&nbsp<span>-西南-</span></div>
-            <div id="area">
-                地区：
-                <button v-on:click="clickArea('shanghai')" @click="changeData" id="shanghai">上海</button> &nbsp&nbsp 
-                <button v-on:click="clickArea('guangzhou')" @click="changeData2" id="guangzhou">广州</button>  &nbsp&nbsp
-                <button v-on:click="clickArea('beijing')" @click="changeData3" id="beijing">北京</button>  &nbsp&nbsp
-                <button v-on:click="clickArea('chengdu')" @click="changeData4" id="chengdu">成都</button>  &nbsp&nbsp
-            </div>
-            <!-- <div>{{area}}</div> -->
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+        <script type="text/javascript" src="http://www.jianvary.com/vue.js"></script>
+        <script type="text/javascript" src="http://www.jianvary.com/jquery.js"></script>
+        <script src="json.js"></script>
+        <div id="top">
+            <img src="images/logo.png" width="50" height="40" style="float:left; margin-left:10px;" />
+            <div id="logo">易刻云</div>
+            <div id="login">登录 &nbsp  注册</div>
         </div>
-        <!-- 为ECharts准备一个具备大小（宽高）的Dom dd-->    
-        <div  id="main" style="width: 600px;height:450px; "></div> 
-        <div id="detail">
-            <button id="detUclod" v-on:click="showDetailUcloud" >查看详情</button>
-            <button id="detAliyun" v-on:click="showDetailAliyun">查看详情</button>
-            <button id="detTecentyun" v-on:click="showDetailTecentyun">查看详情</button>
-            <button id="detJinyun" v-on:click="showDetailJinshan">查看详情</button>    
-        </div> 
-        <div id="downDetail">
-            <div id="down1">
-                <p>
-                    <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
-                    <li>带宽：{{bandwidth}}</li>
-                    <li>硬盘：20G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
-                    <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区A</li>
-                </p>
+        <div id="app">  
+            <div style="margin-top:20px;">
+                <div id="price">
+                    价格对比 
+                </div>
+                <div id="config">
+                    <div id="baseset">常规配置</div>
+                    <div id="cpu">
+                        <p @click= "clickset('2g')" v-on:click="changeCpu" id="cpu2g">CPU 1核 内存 2g 带宽 2M </p>
+                        <p @click= "clickset('4g')" v-on:click="changeCpu2" id="cpu4g">CPU 4核 内存 4g 带宽 5M</p>
+                        <p @click= "clickset('8g')" v-on:click="changeCpu3" id="cpu8g">CPU 4核 内存 8g 带宽 10M</p>
+                    </div>
+                </div>
+                <!-- <div>{{baseset}}</div> -->
+                <div style="clear:both;"></div>
+                <div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>-华东-</span>&nbsp<span>-华南-</span>&nbsp<span>-华北-</span>&nbsp<span>-西南-</span></div>
+                <div id="area">
+                    地区：
+                    <button v-on:click="clickArea('shanghai')" @click="changeData" id="shanghai">上海</button> &nbsp&nbsp 
+                    <button v-on:click="clickArea('guangzhou')" @click="changeData2" id="guangzhou">广州</button>  &nbsp&nbsp
+                    <button v-on:click="clickArea('beijing')" @click="changeData3" id="beijing">北京</button>  &nbsp&nbsp
+                    <button v-on:click="clickArea('chengdu')" @click="changeData4" id="chengdu">成都</button>  &nbsp&nbsp
+                </div>
+                <!-- <div>{{area}}</div> -->
             </div>
-            <div id="down2">
-                <p>
-                    <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
-                    <li>带宽：{{bandwidth}}</li>
-                    <li>硬盘：40G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
-                    <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区B</li>
-                </p>
-            </div>
-            <div id="down3">
-                <p>
-                    <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
-                    <li>带宽：{{bandwidth}}</li>
-                    <li>硬盘：30G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
-                    <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区A</li>
-                </p>
-            </div>
-            <div id="down4">
-                <p>
-                    <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
-                    <li>带宽：{{bandwidth}}</li>
-                    <li>硬盘：10G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
-                    <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区B</li>
-                </p>
-            </div>
-        </div>  
-      </div>
-      <script>  
-  
-        // 它连接 View 与 Model               
-        var app = new Vue({  
-            el: '#app',  
-            data: {
-                message:[10,20,30,50],
-                baseset: '2g',
-                area: 'beijing',
-                cpu: '1c',
-                mem: '2g',
-                bandwidth: '2M',
-                cityName: '全国'
+            <!-- 为ECharts准备一个具备大小（宽高）的Dom dd-->    
+            <div  id="main" style="width: 600px;height:450px;"></div> 
+            <div id="detail">
+                <button id="detUclod" v-on:click="showDetailUcloud" >查看详情</button>
+                <button id="detAliyun" v-on:click="showDetailAliyun">查看详情</button>
+                <button id="detTecentyun" v-on:click="showDetailTecentyun">查看详情</button>
+                <button id="detJinyun" v-on:click="showDetailJinshan">查看详情</button>    
+            </div> 
+            <div id="downDetail">
+                <div id="down1">
+                    <p>
+                        <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
+                        <li>带宽：{{bandwidth}}</li>
+                        <li>硬盘：20G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
+                        <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区A</li>
+                    </p>
+                </div>
+                <div id="down2">
+                    <p>
+                        <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
+                        <li>带宽：{{bandwidth}}</li>
+                        <li>硬盘：40G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
+                        <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区B</li>
+                    </p>
+                </div>
+                <div id="down3">
+                    <p>
+                        <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
+                        <li>带宽：{{bandwidth}}</li>
+                        <li>硬盘：30G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
+                        <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区A</li>
+                    </p>
+                </div>
+                <div id="down4">
+                    <p>
+                        <li>CPU：{{cpu}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp内存: {{mem}}</li>
+                        <li>带宽：{{bandwidth}}</li>
+                        <li>硬盘：10G &nbsp&nbsp&nbsp&nbsp&nbsp系统配送</li>
+                        <li>{{cityName}}<br>&nbsp&nbsp&nbsp&nbsp&nbsp可用区B</li>
+                    </p>
+                </div>
+            </div>  
+        </div>
+        <script>  
+            // 它连接 View 与 Model               
+            var app = new Vue({  
+                el: '#app',  
+                data: {
+                    message:[10,20,30,50],
+                    baseset: '2g',
+                    area: 'beijing',
+                    cpu: '1c',
+                    mem: '2g',
+                    bandwidth: '2M',
+                    cityName: '全国'
 
-            },  
-            computed: {
-                zong: function(){
-                    // this.baseset = val;
-                    if(this.baseset =='2g'){
-                        switch(this.area){
-                            case 'beijing':
-                                this.message = [20,25,30,35];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'shanghai':
-                                this.message = [25,35,35,25];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'guangzhou':
-                                this.message = [40,25,60,25];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'chengdu':
-                                this.message = [10,55,10,55];
-                                break;
-                        }
-                    }
-                    if(this.baseset =='4g'){
-                        switch(this.area){
-                            case 'beijing':
-                                this.message = [20,25,30,35];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'shanghai':
-                                this.message = [25,35,35,25];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'guangzhou':
-                                this.message = [40,25,60,25];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'chengdu':
-                                this.message = [10,55,10,55];
-                                break;
-                        }
-                    }
-                    if(this.baseset =='8g'){
-                        switch(this.area){
-                            case 'beijing':
-                                this.message = [20,25,30,35];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'shanghai':
-                                this.message = [25,35,35,25];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'guangzhou':
-                                this.message = [40,25,60,25];
-                                break;
-                        }
-                        switch(this.area){
-                            case 'chengdu':
-                                this.message = [10,55,10,55];
-                                break;
-                        }
-                    }
-                }
-            },
-            methods: {  
-                clickset: function(val){
-                    this.baseset = val;
-                    this.zongData();
-                },
-                clickArea: function(val){
-                    this.area = val;
-                    this.zongData();
-                },
-                zongData: function(){
-                    // this.baseset = val222;
-                    if(this.baseset =='2g'){
-                        this.cpu = '1c';
-                        this.mem = '2g';
-                        this.bandwidth = '2M';
-                        switch(this.area){
-                            case 'beijing':
-                                this.message = data.twog.city.beijing;
-                                this.cityName = data.twog.cityName.beijing;
-                                break;
-                            case 'shanghai':
-                                this.message = data.twog.city.shanghai;
-                                this.cityName = data.twog.cityName.shanghai;
-                                break;
-                            case 'guangzhou':
-                                this.message = data.twog.city.guangzhou;
-                                this.cityName = data.twog.cityName.guangzhou;
-                                break;
-                            case 'chengdu':
-                                this.message = data.twog.city.chengdu;
-                                this.cityName = data.twog.cityName.chengdu;
-                                break;
-                        }
-                    }
-                    if(this.baseset =='4g'){
-                        this.cpu = '4c';
-                        this.mem = '4g';
-                        this.bandwidth = '5M';
-                        switch(this.area){
-                            case 'beijing':
-                                this.message = data.fourg.city.beijing;
-                                this.cityName = data.twog.cityName.beijing;
-                                break;
-                            case 'shanghai':
-                                this.message = data.fourg.city.shanghai;
-                                this.cityName = data.twog.cityName.shanghai;
-                                break;
-                            case 'guangzhou':
-                                this.message = data.fourg.city.guangzhou;
-                                this.cityName = data.twog.cityName.guangzhou;
-                                break;
-                            case 'chengdu':
-                                this.message = data.fourg.city.chengdu;
-                                this.cityName = data.twog.cityName.chengdu;
-                                break;
-                        }
-                    }
-                    if(this.baseset =='8g'){
-                        this.cpu = '4c';
-                        this.mem = '8g';
-                        this.bandwidth = '10M';
-                        switch(this.area){
-                            case 'beijing':
-                                this.message = data.eightg.city.beijing;
-                                this.cityName = data.twog.cityName.beijing;
-                                break;
-                            case 'shanghai':
-                                this.message = data.eightg.city.shanghai;
-                                this.cityName = data.twog.cityName.shanghai;
-                                break;
-                            case 'guangzhou':
-                                this.message = data.eightg.city.guangzhou;
-                                this.cityName = data.twog.cityName.guangzhou;
-                                break;
-                            case 'chengdu':
-                                this.message = data.eightg.city.chengdu;
-                                this.cityName = data.twog.cityName.chengdu;
-                                break;
-                        }
-                    }
-                },
-                changeData: function(){
-                    $('#shanghai').css({"background":'blue','color':'#fff'});
-                    $('button#shanghai').siblings().css({"background":'#eee','color':'#000'});
                 },  
-                changeData2: function(){
-                    $('#guangzhou').css({"background":'blue','color':'#fff'});
-                    $('button#guangzhou').siblings().css({"background":'#eee','color':'#000'});
-                },  
-                changeData3: function(){
-                    $('#beijing').css({"background":'blue','color':'#fff'});
-                    $('button#beijing').siblings().css({"background":'#eee','color':'#000'});
-                },  
-                changeData4: function(){
-                    $('#chengdu').css({"background":'blue','color':'#fff'});
-                    $('button#chengdu').siblings().css({"background":'#eee','color':'#000'});
-                }, 
-                changeCpu: function(){
-                    $('#cpu2g').css({"background":'blue','color':'#fff'});
-                    $('p#cpu2g').siblings().css({"background":'#eee','color':'#000'});
+                computed: {
+                    zong: function(){
+                        // this.baseset = val;
+                        if(this.baseset =='2g'){
+                            switch(this.area){
+                                case 'beijing':
+                                    this.message = [20,25,30,35];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'shanghai':
+                                    this.message = [25,35,35,25];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'guangzhou':
+                                    this.message = [40,25,60,25];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'chengdu':
+                                    this.message = [10,55,10,55];
+                                    break;
+                            }
+                        }
+                        if(this.baseset =='4g'){
+                            switch(this.area){
+                                case 'beijing':
+                                    this.message = [20,25,30,35];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'shanghai':
+                                    this.message = [25,35,35,25];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'guangzhou':
+                                    this.message = [40,25,60,25];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'chengdu':
+                                    this.message = [10,55,10,55];
+                                    break;
+                            }
+                        }
+                        if(this.baseset =='8g'){
+                            switch(this.area){
+                                case 'beijing':
+                                    this.message = [20,25,30,35];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'shanghai':
+                                    this.message = [25,35,35,25];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'guangzhou':
+                                    this.message = [40,25,60,25];
+                                    break;
+                            }
+                            switch(this.area){
+                                case 'chengdu':
+                                    this.message = [10,55,10,55];
+                                    break;
+                            }
+                        }
+                    }
                 },
-                changeCpu2: function(){
-                    $('#cpu4g').css({"background":'blue','color':'#fff'});
-                    $('p#cpu4g').siblings().css({"background":'#eee','color':'#000'});
-                },
-                changeCpu3: function(){
-                    $('#cpu8g').css({"background":'blue','color':'#fff'});
-                    $('p#cpu8g').siblings().css({"background":'#eee','color':'#000'});
-                },
-                showDetailUcloud: function(){
-                    $('#down1').css({"visibility":"visible"});
-                    $('div#down1').siblings().css({"visibility":"hidden"});
-                },
-                showDetailAliyun: function(){
-                    $('#down2').css({"visibility":"visible"});
-                    $('div#down2').siblings().css({"visibility":"hidden"});
-                },
-                showDetailTecentyun: function(){
-                    $('#down3').css({"visibility":"visible"});
-                    $('div#down3').siblings().css({"visibility":"hidden"});
-                },
-                showDetailJinshan: function(){
-                    $('#down4').css({"visibility":"visible"});
-                    $('div#down4').siblings().css({"visibility":"hidden"});
-                },
-            draw(){                                                                             
-                // 指定图表的配置项和数据    
-                var category=["ucloud","阿里云","腾讯云","金山云"];  
-                var option = {    
-                    title: {    
-                        // text: 'ECharts 入门示例'    
-                    },    
-                    tooltip: {},    
-                    xAxis: {    
-                        data: category  
-                    },    
-                    yAxis: {},    
-                    series: [{    
-                        type: 'bar',    
-                        data: this.message,   //数据绑定  
-                        itemStyle: {   
-                            //通常情况下：
-                            normal:{  
-            　　　　　　　　　　　　//每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-                                color: function (params){
-                                    var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','blue'];
-                                    return colorList[params.dataIndex];
+                methods: {  
+                    clickset: function(val){
+                        this.baseset = val;
+                        this.zongData();
+                    },
+                    clickArea: function(val){
+                        this.area = val;
+                        this.zongData();
+                    },
+                    zongData: function(){
+                        // this.baseset = val222;
+                        if(this.baseset =='2g'){
+                            this.cpu = '1c';
+                            this.mem = '2g';
+                            this.bandwidth = '2M';
+                            switch(this.area){
+                                case 'beijing':
+                                    this.message = data.twog.city.beijing;
+                                    this.cityName = data.twog.cityName.beijing;
+                                    break;
+                                case 'shanghai':
+                                    this.message = data.twog.city.shanghai;
+                                    this.cityName = data.twog.cityName.shanghai;
+                                    break;
+                                case 'guangzhou':
+                                    this.message = data.twog.city.guangzhou;
+                                    this.cityName = data.twog.cityName.guangzhou;
+                                    break;
+                                case 'chengdu':
+                                    this.message = data.twog.city.chengdu;
+                                    this.cityName = data.twog.cityName.chengdu;
+                                    break;
+                            }
+                        }
+                        if(this.baseset =='4g'){
+                            this.cpu = '4c';
+                            this.mem = '4g';
+                            this.bandwidth = '5M';
+                            switch(this.area){
+                                case 'beijing':
+                                    this.message = data.fourg.city.beijing;
+                                    this.cityName = data.twog.cityName.beijing;
+                                    break;
+                                case 'shanghai':
+                                    this.message = data.fourg.city.shanghai;
+                                    this.cityName = data.twog.cityName.shanghai;
+                                    break;
+                                case 'guangzhou':
+                                    this.message = data.fourg.city.guangzhou;
+                                    this.cityName = data.twog.cityName.guangzhou;
+                                    break;
+                                case 'chengdu':
+                                    this.message = data.fourg.city.chengdu;
+                                    this.cityName = data.twog.cityName.chengdu;
+                                    break;
+                            }
+                        }
+                        if(this.baseset =='8g'){
+                            this.cpu = '4c';
+                            this.mem = '8g';
+                            this.bandwidth = '10M';
+                            switch(this.area){
+                                case 'beijing':
+                                    this.message = data.eightg.city.beijing;
+                                    this.cityName = data.twog.cityName.beijing;
+                                    break;
+                                case 'shanghai':
+                                    this.message = data.eightg.city.shanghai;
+                                    this.cityName = data.twog.cityName.shanghai;
+                                    break;
+                                case 'guangzhou':
+                                    this.message = data.eightg.city.guangzhou;
+                                    this.cityName = data.twog.cityName.guangzhou;
+                                    break;
+                                case 'chengdu':
+                                    this.message = data.eightg.city.chengdu;
+                                    this.cityName = data.twog.cityName.chengdu;
+                                    break;
+                            }
+                        }
+                    },
+                    changeData: function(){
+                        $('#shanghai').css({"background":'#6495ED','color':'#fff'});
+                        $('button#shanghai').siblings().css({"background":'#eee','color':'#000'});
+                    },  
+                    changeData2: function(){
+                        $('#guangzhou').css({"background":'#6495ED','color':'#fff'});
+                        $('button#guangzhou').siblings().css({"background":'#eee','color':'#000'});
+                    },  
+                    changeData3: function(){
+                        $('#beijing').css({"background":'#6495ED','color':'#fff'});
+                        $('button#beijing').siblings().css({"background":'#eee','color':'#000'});
+                    },  
+                    changeData4: function(){
+                        $('#chengdu').css({"background":'#6495ED','color':'#fff'});
+                        $('button#chengdu').siblings().css({"background":'#eee','color':'#000'});
+                    }, 
+                    changeCpu: function(){
+                        $('#cpu2g').css({"background":'#6495ED','color':'#fff'});
+                        $('p#cpu2g').siblings().css({"background":'#eee','color':'#000'});
+                    },
+                    changeCpu2: function(){
+                        $('#cpu4g').css({"background":'#6495ED','color':'#fff'});
+                        $('p#cpu4g').siblings().css({"background":'#eee','color':'#000'});
+                    },
+                    changeCpu3: function(){
+                        $('#cpu8g').css({"background":'#6495ED','color':'#fff'});
+                        $('p#cpu8g').siblings().css({"background":'#eee','color':'#000'});
+                    },
+                    showDetailUcloud: function(){
+                        $('#down1').css({"visibility":"visible"});
+                        $('div#down1').siblings().css({"visibility":"hidden"});
+                    },
+                    showDetailAliyun: function(){
+                        $('#down2').css({"visibility":"visible"});
+                        $('div#down2').siblings().css({"visibility":"hidden"});
+                    },
+                    showDetailTecentyun: function(){
+                        $('#down3').css({"visibility":"visible"});
+                        $('div#down3').siblings().css({"visibility":"hidden"});
+                    },
+                    showDetailJinshan: function(){
+                        $('#down4').css({"visibility":"visible"});
+                        $('div#down4').siblings().css({"visibility":"hidden"});
+                    },
+                draw(){                                                                             
+                    // 指定图表的配置项和数据    
+                    var category=["ucloud","阿里云","腾讯云","金山云"];  
+                    var option = {    
+                        title: {    
+                            // text: 'ECharts'    
+                        },    
+                        tooltip: {   
+                            // trigger: 'axis',
+                            trigger : 'item',  
+                            show: false,  //鼠标悬浮弹窗不提示  
+                        },  
+                        legend: {
+                            // orient: 'vertical',
+                            // x: 'center',
+                            // y: 'bottom',
+                            // left: 'right',
+                            data: category,
+                            selected: {
+
+                            }
+                        },  
+                        xAxis:[
+                            {    
+                                data: category,
+                                splitLine:{show: false},//去除网格线
+                            },    
+                        ],   
+                        yAxis: [
+                            {
+                                axisLabel : {
+                                    formatter: function(){
+                                        return "";  //y轴不显示数值
+                                    }
                                 },
-                                barBorderRadius:[10, 10, 0, 0],
+                                splitLine:{show: false},//去除网格线
+                            }
+                        ],    
+                        series: [{    
+                            type: 'bar',    
+                            data: this.message,   //数据绑定  
+                            itemStyle: {   
+                                //通常情况下：
+                                normal:{  
+                　　　　　　　　　　　　//每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+                                    color: function (params){
+                                        var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','blue'];
+                                        return colorList[params.dataIndex];
+                                    },
+                                    barBorderRadius:[10, 10, 0, 0], //柱子圆角
+                                    label: {             
+                                        show: true,
+                                        position: 'top',   //顶部显示数字
+                                        textStyle: {
+                                            color: 'blue',
+                                            fontWeight: 'bold'
+                                        }
+                                    }
+                                },
                             },
-                            //鼠标悬停时：
-                            // emphasis: {
-                            //         shadowBlur: 10,
-                            //         shadowOffsetX: 0,
-                            //         shadowColor: 'rgba(0, 0, 0, 0.5)',
-                            //         barBorderRadius: 30
-                            // },
-                            label: {
-                                show: false,
-                                // position: 'top',
-                                // textStyle: {
-                                //     color: 'blue',
-                                //     fontWeight:'bolder',  
-                                //     fontSize : '12',  
-                                //     fontFamily : '微软雅黑',  
-                                // }
-                            },
-                        },
-                    }],
-                };    
-                // 使用刚指定的配置项和数据显示图表。    
-                this.myChart.setOption(option);      
-            }  
-            },  
-            watch:{  //数据变化时自动重画，在控制台修改message,会自动重画  
-                message: function(){  
-                this.draw();      
+                        }],
+                    };    
+                    // 使用刚指定的配置项和数据显示图表。    
+                    this.myChart.setOption(option);      
                 }  
-            },  
-            mounted(){  
-                this.$nextTick(function() {  
-                    this.myChart = echarts.init(document.getElementById('main'));  //初始化echarts实例  
-                    this.draw();  
-                })  
-            }  
-        });  
-        // $("body").click(function(){
-        //     $("#downDetail div").css({"visibility":"hidden"});
-        // });
-            // alert(data.twog.cpu);
-        var sear = location.search.slice(6);
-        console.log(data.twog.cityName.shanghai);
-        $('#'+sear).click();
-        $('#cpu2g').click();
-    </script>  
+                },  
+                watch:{  //数据变化时自动重画，在控制台修改message,会自动重画  
+                    message: function(){  
+                    this.draw();      
+                    }  
+                },  
+                mounted(){  
+                    this.$nextTick(function() {  
+                        this.myChart = echarts.init(document.getElementById('main'));  //初始化echarts实例  
+                        this.draw();  
+                    })  
+                }  
+            });  
+            // $("body").click(function(){
+            //     $("#downDetail div").css({"visibility":"hidden"});
+            // });
+                // alert(data.twog.cpu);
+            var sear = location.search.slice(6);
+            console.log(data.twog.cityName.shanghai);
+            $('#'+sear).click();
+            $('#cpu2g').click();
+        </script>  
    </body>
 </html>
