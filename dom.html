@@ -370,7 +370,7 @@
                             // x: 'center',
                             // y: 'bottom',
                             // left: 'right',
-                            data: category,
+                            data: ['柱状图','折线图'],
                             selected: {
 
                             }
@@ -394,6 +394,7 @@
                         series: [{    
                             type: 'bar',    
                             data: this.message,   //数据绑定  
+                            name: '柱状图',
                             itemStyle: {   
                                 //通常情况下：
                                 normal:{  
@@ -413,7 +414,21 @@
                                     }
                                 },
                             },
-                        }],
+                        },
+                        {
+                            type: 'line',
+                            data: this.message,
+                            name: '折线图',
+                            color: 'yellow',
+                            itemStyle: {
+                                normal: {
+                                    lineStyle: {
+                                        color: 'yellow'
+                                    }
+                                }
+                            }
+                        }
+                        ],
                     };    
                     // 使用刚指定的配置项和数据显示图表。    
                     this.myChart.setOption(option);      
@@ -439,6 +454,12 @@
             console.log(data.twog.cityName.shanghai);
             $('#'+sear).click();
             $('#cpu2g').click();
+            //查看详情滑动
+            // $('#detUclod').hover(function(){
+            //     $('#down1').css({"visibility":"visible"});
+            // },function(){
+            //     $('#down1').css({"visibility":"hidden"});
+            // });
         </script>  
    </body>
 </html>
