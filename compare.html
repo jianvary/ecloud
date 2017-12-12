@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>配置选择</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        .choice{
+            margin: 20px 0 20px 20px;
+        }
+        #title{
+            margin: 10px 0 10px 30px;
+        }
+        #title div{
+            float: left;
+            margin: 0 20px 0 0;
+            cursor: pointer;
+        }
+        .content{
+            width: 600px;
+            height: 500px;
+            position: relative;
+            float: left;
+            margin: 20px 0 0 20px;
+            background: #ccc;
+        }
+        .content #area{
+            width: 500px;
+            position: absolute;
+        }
+        .content #net{
+            width: 500px;
+            position: absolute;
+            padding: 0 0 0 30px;
+            display: none;
+        }
+        .config{
+            float: left;
+            margin: 20px 0 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="top">
+        <img src="images/logo.png" width="50" height="40" style="float:left; margin-left:10px;" />
+        <div id="logo">易刻云</div>
+        <div id="login">登录 &nbsp  注册</div>
+    </div>
+    <!-- header -->
+    <div id="app">
+        <div class="choice">配置选择</div>
+        <!-- 配置选择 -->
+        <div id="title">
+            <div id="choiceArea">选择地域与机型</div>
+            <div id="choiceNet">选择储存和网络</div>
+            <div style="clear:both"></div>
+        </div>
+        <!-- 选择地域与机型 -->
+        <div class="content">
+            <div id="area">area</div>
+            <div id="net">net</div>
+        </div>
+        <!-- 选择地域与机型内容 -->
+        <div class="config">
+            <div>已选择配置明细</div>
+        </div>
+        <!-- 已选择配置明细 -->
+    </div>
+    <!-- app -->
+    <script src="http://www.jianvary.com/jquery.js"></script>
+    <script>
+        $('#choiceArea').on('click',function(){
+            $('#area').css({'display': 'block'});
+            $('#net').css({'display': 'none'});
+        });
+        $('#choiceNet').on('click',function(){
+            $('#area').css({'display': 'none'});
+            $('#net').css({'display': 'block'});
+        });
+    </script>
+</body>
+</html> 
