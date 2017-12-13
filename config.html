@@ -88,6 +88,7 @@
         }
         .areaDiFirst{
             font-size: 18px;
+            
         }
         .content #net{
             width: 500px;
@@ -122,6 +123,18 @@
             text-align: center;
             width: 130px;
         }
+        #slider-range-min{
+          width: 370px;
+          float: left;
+          background: #fff;
+          color: #6495ED;
+        }
+        #amount{
+            width: 30px;
+            margin-left: 20px;
+            text-align: center;
+            background: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -151,15 +164,16 @@
                     </div>
                     <div class="areaDi">
                         <span class="areaDiFirst">地域</span>
-                        <span class="areaDiOther colorBeiji">北京</span>
-                        <span class="areaDiOther">上海</span>
-                        <span class="areaDiOther">广州</span>
-                        <span class="areaDiOther">成都</span>
+                        <span id="colorBg">
+                            <span class="areaDiOther colorBeiji" id="areaDiBeijing" v-on:click="areaDiChange('beijing')">北京</span>
+                            <span class="areaDiOther" id="areaDiShanghai" @click="areaDiChange('shanghai')">上海</span>
+                            <span class="areaDiOther" id="areaDiGuangzhou" @click="areaDiChange('guangzhou')">广州</span>
+                            <span class="areaDiOther" id="areaDiChengdu" @click="areaDiChange('chengdu')">成都</span>
+                        </span>
                     </div>
                     <div class="areaDi">
                         <span class="areaDiFirst">可用区</span>
-                        <span class="areaDiOther colorBeiji">北京1</span>
-                        <span class="areaDiOther">北京2</span>
+                        <component :is="which"></component>
                     </div>
                     <div class="areaDi">
                         <span class="areaDiFirst">机型</span>
@@ -168,14 +182,18 @@
                 <div id="net">
                     <div class="areaDi">
                         <span class="areaDiFirst">系统盘</span>
-                        <span class="areaDiOther colorBeiji">本地硬盘</span>
-                        <span class="areaDiOther">云硬盘</span>
-                        <span class="areaDiOther">SSD云硬盘</span>
+                        <span>
+                            <span class="areaDiOther colorBeiji" id="panLocal" @click="panChange('panLocal')">本地硬盘</span>
+                            <span class="areaDiOther" id="panYun" @click="panChange('panYun')">云硬盘</span>
+                            <span class="areaDiOther" id="panSSD" @click="panChange('panSSD')">SSD云硬盘</span>
+                        </span>
                     </div>
                     <div class="areaDi">
                         <span class="areaDiFirst">数据盘</span>
-                        <span class="areaDiOther">云硬盘</span>
-                        <span class="areaDiOther colorBeiji">SSD云硬盘</span>
+                        <component :is="whichPan"></component>
+                    </div>
+                    <div class="areaDi">
+                        <div id="slider-range-min"></div><input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold;">GB
                     </div>
                     <div class="areaDi">
                         <span class="areaDiFirst">带宽计费模式</span>
@@ -188,10 +206,10 @@
             <div class="config">
                 <div class="hasChoice">已选择配置明细</div>
                 <div class="hasChoiceCont">
-                    <span class="hasDi">地域</span><span class="hasContent">华北地区-北京</span>
+                    <span class="hasDi">地域</span><span class="hasContent">{{areaRight}}</span>
                 </div>
                 <div class="hasChoiceCont">
-                    <span>可用区</span><span>北京1</span>
+                    <span>可用区</span><span>{{areaRight}}1</span>
                 </div>
                 <div class="hasChoiceCont">
                     <span>机型</span><span>标准型、2核CPU、4G内存</span>
@@ -200,7 +218,7 @@
                     <span>镜像</span><span>CentOS 7.3 64位</span>
                 </div>
                 <div class="hasChoiceCont">
-                    <span>存储</span><span>系统盘 50G 云硬盘</span>
+                    <span>存储</span><span>系统盘 50GB 云硬盘</span>
                 </div>
                 <div class="hasChoiceCont">
                     <span>带宽</span><span>2M</span>
@@ -216,7 +234,103 @@
         </div><!--contentAll -->
     </div>
     <!-- app -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="http://www.jianvary.com/jquery.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://www.jianvary.com/vue.js"></script>
+    
+    <script>
+        var componentBeijing = {
+            template: '<span><span class="areaDiOther colorBeiji" >北京1</span> <span class="areaDiOther">北京2</span> <span class="areaDiOther">北京3</span></span>'
+        }
+        var componentShanghai = {
+            template: '<span><span class="areaDiOther colorBeiji">上海1</span><span class="areaDiOther">上海2</span></span>'
+        }
+        var componentGuangzhou = {
+            template: '<span><span class="areaDiOther colorBeiji">广州1</span><span class="areaDiOther">广州2</span> <span class="areaDiOther">广州3</span></span>'
+        }
+        var componentChengdu = {
+            template: '<span><span class="areaDiOther colorBeiji">成都1</span><span class="areaDiOther">成都2</span></span>'
+        }
+        var componentLocalpan = {
+            template: '<span style="color:#000;">&nbsp;&nbsp;本地硬盘</span>'
+        }
+        var componentYunpan = {
+            template: '<span><span class="areaDiOther colorBeiji">云硬盘</span><span class="areaDiOther">SSD云硬盘</span></span>'
+        }
+        var componentSSDpan = {
+            template: '<span><span class="areaDiOther">云硬盘</span><span class="areaDiOther colorBeiji">SSD云硬盘</span></span>'
+        }
+        var app = new Vue({
+            el: '#app',
+            data: {
+                user: '北京',
+                which: 'componentBeijing',
+                whichPan: 'componentLocalpan',
+                areaRight: '华北地区-北京',
+
+            },
+            methods:{
+                cli: function(){
+                    console.log('click');
+                },
+                areaDiChange: function(val){
+                    if(val=="beijing"){
+                        this.which="componentBeijing";
+                        this.areaRight = "华北地区-北京";
+                        $('#areaDiBeijing').css({"background":'#6495ED','color':'#fff'});
+                        $('span#areaDiBeijing').siblings().css({"background":'#ccc','color':'#000'});
+                    }
+                    else if(val=="shanghai"){
+                        this.which="componentShanghai";
+                        this.areaRight = "华东地区-上海";
+                        $('#areaDiShanghai').css({"background":'#6495ED','color':'#fff'});
+                        $('span#areaDiShanghai').siblings().css({"background":'#ccc','color':'#000'});
+                    }
+                    else if(val=="guangzhou"){
+                        this.which="componentGuangzhou";
+                        this.areaRight = "华南地区-广州";
+                        $('#areaDiGuangzhou').css({"background":'#6495ED','color':'#fff'});
+                        $('span#areaDiGuangzhou').siblings().css({"background":'#ccc','color':'#000'});
+                    }
+                    else if(val=="chengdu"){
+                        this.which="componentChengdu";
+                        this.areaRight = "西南地区-成都";
+                        $('#areaDiChengdu').css({"background":'#6495ED','color':'#fff'});
+                        $('span#areaDiChengdu').siblings().css({"background":'#ccc','color':'#000'});
+                    }
+                },
+                panChange: function(val){
+                    if(val=="panLocal"){
+                        this.whichPan="componentLocalpan";
+                        $('#panLocal').css({"background":'#6495ED','color':'#fff'});
+                        $('span#panLocal').siblings().css({"background":'#ccc','color':'#000'});
+                    }
+                    else if(val=="panYun"){
+                        this.whichPan="componentYunpan";
+                        $('#panYun').css({"background":'#6495ED','color':'#fff'});
+                        $('span#panYun').siblings().css({"background":'#ccc','color':'#000'});
+                    }
+                    else if(val=="panSSD"){
+                        this.whichPan="componentSSDpan";
+                        $('#panSSD').css({"background":'#6495ED','color':'#fff'});
+                        $('span#panSSD').siblings().css({"background":'#ccc','color':'#000'});
+                    }
+                }
+            },
+            components:{
+                'componentBeijing': componentBeijing,
+                'componentShanghai': componentShanghai,
+                'componentGuangzhou': componentGuangzhou,
+                'componentChengdu': componentChengdu,
+                'componentLocalpan': componentLocalpan,
+                'componentYunpan': componentYunpan,
+                'componentSSDpan': componentSSDpan
+
+            }
+        });
+    
+    </script>
     <script>
         $('#choiceArea').on('click',function(){
             $('#choiceArea').css({'background':'#f0f0f0','color':'#000'});
@@ -229,6 +343,19 @@
             $('#choiceArea').css({'background':'#fff','color':'#666'});
             $('#area').css({'display': 'none'});
             $('#net').css({'display': 'block'});
+        });
+        $(function() {
+            $( "#slider-range-min" ).slider({
+            range: "min",
+            value: 1,
+            min: 1,
+            max: 500,
+            color: 'yellow',
+            slide: function( event, ui ) {
+                $( "#amount" ).val(ui.value );
+            }
+            });
+            $( "#amount" ).val($( "#slider-range-min" ).slider( "value" ) );
         });
     </script>
 </body>
