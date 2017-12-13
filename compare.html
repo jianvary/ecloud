@@ -9,36 +9,118 @@
     <style>
         .choice{
             margin: 20px 0 20px 20px;
+            line-height: 50px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #6495ED;
+            font-size: 24px;
         }
         #title{
-            margin: 10px 0 10px 30px;
+            margin: 10px 0 0 0;
+            background: #fff;
         }
-        #title div{
+        #choiceArea{
             float: left;
-            margin: 0 20px 0 0;
+            margin: 0;
+            padding: 10px 10px 0 10px;
+            height: 50px;
+            line-height: 50px;
             cursor: pointer;
+            color: #000;
+            background: #f0f0f0;   
+        }
+        #choiceNet{
+            float: left;
+            margin: 0;
+            padding: 10px 10px 0 10px;
+            height: 50px;
+            line-height: 50px;
+            cursor: pointer;
+            color: #666;
+            background: #fff;
+        }
+        #contentAll{
+            background: #f0f0f0;
+            height: 480px;
+            margin: 0 0 0 20px;
         }
         .content{
             width: 600px;
-            height: 500px;
+            height: 420px;
             position: relative;
             float: left;
-            margin: 20px 0 0 20px;
-            background: #ccc;
+            margin: 0;
+            background: #f0f0f0;
         }
         .content #area{
             width: 500px;
             position: absolute;
         }
+        #areaHua{
+            margin: 30px 0 20px 100px;
+            font-size: 14px;
+            color: #6495ED;
+        }
+        #areaHua span{
+            margin-right: 20px;
+        }
+        .areaDi{
+            margin: 30px 0 20px 50px;
+            font-size: 14px;
+            color: #6495ED;
+        }
+        .areaDi .areaDiOther{
+            border: 1px solid #ccc;
+            /* width: 60px; */
+            max-width: 100px;
+            min-width: 50px;
+            height: 30px;
+            margin-left: 20px;
+            line-height: 30px;
+            display: inline-block;
+            text-align: center;
+            background: #ccc;
+            color: #000;
+            cursor: pointer;
+        }
+        .areaDi .colorBeiji{
+            color: #fff;
+            background: #6495ED;
+        }
+        .areaDiFirst{
+            font-size: 18px;
+        }
         .content #net{
             width: 500px;
             position: absolute;
-            padding: 0 0 0 30px;
             display: none;
         }
         .config{
             float: left;
-            margin: 20px 0 0 20px;
+            width: 400px;
+            margin: 30px 0 0 20px;
+            background: #F8F8FF;
+        }
+        .hasChoice{
+            margin: 20px 0 20px 20px;
+            font-weight: bold;
+        }
+        .hasChoiceCont{
+            margin: 10px 0 10px 10px;
+        }
+        .hasChoiceCont span{
+            display: inline-block;
+            margin-right: 50px;
+            color: #666;
+        }
+        .hasChoiceCont .hasCompare{
+            border-radius: 5px;
+            color: #fff;
+            background: #6495ED;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+            text-align: center;
+            width: 130px;
         }
     </style>
 </head>
@@ -52,30 +134,99 @@
     <div id="app">
         <div class="choice">配置选择</div>
         <!-- 配置选择 -->
-        <div id="title">
-            <div id="choiceArea">选择地域与机型</div>
-            <div id="choiceNet">选择储存和网络</div>
-            <div style="clear:both"></div>
-        </div>
-        <!-- 选择地域与机型 -->
-        <div class="content">
-            <div id="area">area</div>
-            <div id="net">net</div>
-        </div>
-        <!-- 选择地域与机型内容 -->
-        <div class="config">
-            <div>已选择配置明细</div>
-        </div>
-        <!-- 已选择配置明细 -->
+        <div id="contentAll">
+            <div id="title">
+                <div id="choiceArea">选择地域与机型</div>
+                <div id="choiceNet">选择储存和网络</div>
+                <div style="clear:both"></div>
+            </div>
+            <!-- 选择地域与机型 -->
+            <div class="content">
+                <div id="area">
+                    <div id="areaHua">
+                        <span>--华北--</span>
+                        <span>--华东--</span>
+                        <span>--华南--</span>
+                        <span>--西南--</span>
+                    </div>
+                    <div class="areaDi">
+                        <span class="areaDiFirst">地域</span>
+                        <span class="areaDiOther colorBeiji">北京</span>
+                        <span class="areaDiOther">上海</span>
+                        <span class="areaDiOther">广州</span>
+                        <span class="areaDiOther">成都</span>
+                    </div>
+                    <div class="areaDi">
+                        <span class="areaDiFirst">可用区</span>
+                        <span class="areaDiOther colorBeiji">北京1</span>
+                        <span class="areaDiOther">北京2</span>
+                    </div>
+                    <div class="areaDi">
+                        <span class="areaDiFirst">机型</span>
+                    </div>
+                </div>
+                <div id="net">
+                    <div class="areaDi">
+                        <span class="areaDiFirst">系统盘</span>
+                        <span class="areaDiOther colorBeiji">本地硬盘</span>
+                        <span class="areaDiOther">云硬盘</span>
+                        <span class="areaDiOther">SSD云硬盘</span>
+                    </div>
+                    <div class="areaDi">
+                        <span class="areaDiFirst">数据盘</span>
+                        <span class="areaDiOther">云硬盘</span>
+                        <span class="areaDiOther colorBeiji">SSD云硬盘</span>
+                    </div>
+                    <div class="areaDi">
+                        <span class="areaDiFirst">带宽计费模式</span>
+                        <span class="areaDiOther colorBeiji">按带宽</span>
+                        <span class="areaDiOther">按流量</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 选择地域与机型内容 -->
+            <div class="config">
+                <div class="hasChoice">已选择配置明细</div>
+                <div class="hasChoiceCont">
+                    <span class="hasDi">地域</span><span class="hasContent">华北地区-北京</span>
+                </div>
+                <div class="hasChoiceCont">
+                    <span>可用区</span><span>北京1</span>
+                </div>
+                <div class="hasChoiceCont">
+                    <span>机型</span><span>标准型、2核CPU、4G内存</span>
+                </div>
+                <div class="hasChoiceCont">
+                    <span>镜像</span><span>CentOS 7.3 64位</span>
+                </div>
+                <div class="hasChoiceCont">
+                    <span>存储</span><span>系统盘 50G 云硬盘</span>
+                </div>
+                <div class="hasChoiceCont">
+                    <span>带宽</span><span>2M</span>
+                </div>
+                <div class="hasChoiceCont">
+                    <span>价格区间</span><span>238-310元/月</span>
+                </div>
+                <div class="hasChoiceCont">
+                    <span class="hasCompare">各云商价格对比</span>
+                </div>
+            </div>
+            <!-- 已选择配置明细 -->
+        </div><!--contentAll -->
     </div>
     <!-- app -->
     <script src="http://www.jianvary.com/jquery.js"></script>
     <script>
         $('#choiceArea').on('click',function(){
+            $('#choiceArea').css({'background':'#f0f0f0','color':'#000'});
+            $('#choiceNet').css({'background':'#fff','color':'#666'});
             $('#area').css({'display': 'block'});
             $('#net').css({'display': 'none'});
         });
         $('#choiceNet').on('click',function(){
+            $('#choiceNet').css({'background':'#f0f0f0','color':'#000'});
+            $('#choiceArea').css({'background':'#fff','color':'#666'});
             $('#area').css({'display': 'none'});
             $('#net').css({'display': 'block'});
         });
